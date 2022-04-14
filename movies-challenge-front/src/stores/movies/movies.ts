@@ -59,7 +59,8 @@ const useMoviesStore = defineStore({
           .then((response: AxiosResponse<ResponseMoviesDataSuccesful>) => {
             this.movies = response.data.results;
             this.movies.forEach((value) => {
-              value.backdrop_path = this.imageUrlTMDB + value.backdrop_path;
+              value.backdrop_path =
+                import.meta.env.VITE_TMDB_BASE_IMAGE_URL + value.backdrop_path;
             });
             this.messageApi = "";
             this.totalPages = response.data.total_pages;
