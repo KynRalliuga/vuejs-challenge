@@ -7,8 +7,6 @@ export default defineComponent({
   setup() {
     const movieStore = useMoviesStore();
 
-    movieStore.fetchMovies();
-
     return { movieStore };
   },
 });

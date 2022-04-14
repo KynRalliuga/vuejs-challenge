@@ -36,6 +36,7 @@ const useMoviesStore = defineStore({
       if (!this.isLoading) {
         this.isLoading = true;
         this.messageApi = "Carregando...";
+
         await axios
           .get(
             `https://api.themoviedb.org/3/trending/movie/${this.time_window}?api_key=&page=${this.page}`

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { setActivePinia, createPinia } from "pinia";
-import { useMenuStore } from "../menu";
+import useMenuStore from "../menu/menu";
 import router from "../../router";
 
 describe("menu", () => {
