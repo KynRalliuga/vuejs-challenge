@@ -39,10 +39,15 @@ const useMoviesStore = defineStore({
 
         await axios
           .get(
-            `https://api.themoviedb.org/3/trending/movie/${this.time_window}?api_key=&page=${this.page}`
+            `${import.meta.env.VITE_TMDB_BASE_API_URL}/trending/movie/${
+              this.time_window
+            }?api_key=${import.meta.env.VITE_API_TOKEN}&page=${this.page}`
           )
           .then((response: AxiosResponse<ResponseMoviesDataSuccesful>) => {
             this.movies = response.data.results;
+            this.movies.forEach((value) => {
+              value.backdrop_path = this.imageUrlTMDB + value.backdrop_path;
+            });
             this.messageApi = "";
           })
           .catch((response: AxiosResponse<ResponseMoviesError>) => {
