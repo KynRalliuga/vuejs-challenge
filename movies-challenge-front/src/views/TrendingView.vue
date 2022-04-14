@@ -4,6 +4,9 @@ import DefaultTemplate from "../components/Templates/DefaultTemplate";
 
 <template>
   <DefaultTemplate>
-    <p class="text-center">Enter on trending and see the best movies.</p>
+    <p class="text-center">
+      Choose between the options daily and weekly to see the best movies in this
+      period of time
+    </p>
   </DefaultTemplate>
 </template>
