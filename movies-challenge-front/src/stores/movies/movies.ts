@@ -11,6 +11,7 @@ const useMoviesStore = defineStore({
   id: "movies",
   state: () => ({
     page: 1,
+    totalPages: 1,
     time_window: "day" as "day" | "week",
     options: [
       {
@@ -32,6 +33,18 @@ const useMoviesStore = defineStore({
       this.time_window = (payload.target as SelectHTMLAttributes).value;
     },
 
+    changePage(type: "+" | "-") {
+      if (type === "+" && this.page < this.totalPages) {
+        this.page++;
+      } else if (type === "-" && this.page > 1) {
+        this.page--;
+      }
+    },
+
+    resetPage() {
+      this.page = 1;
+    },
+
     async fetchMovies() {
       if (!this.isLoading) {
         this.isLoading = true;
@@ -49,10 +62,12 @@ const useMoviesStore = defineStore({
               value.backdrop_path = this.imageUrlTMDB + value.backdrop_path;
             });
             this.messageApi = "";
+            this.totalPages = response.data.total_pages;
           })
           .catch((response: AxiosResponse<ResponseMoviesError>) => {
             this.movies = [];
             this.messageApi = response.data.status_message;
+            this.totalPages = 1;
           })
           .finally(() => {
             this.isLoading = false;

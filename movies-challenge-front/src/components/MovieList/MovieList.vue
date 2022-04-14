@@ -16,6 +16,12 @@
         :key="movie.id"
       />
     </div>
+    <PaginationComponent
+      :page="movieStore.page"
+      :totalPages="movieStore.totalPages"
+      :changePage="movieStore.changePage"
+      class="py-8 text-right"
+    />
   </div>
 </template>
 
