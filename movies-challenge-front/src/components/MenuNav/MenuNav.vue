@@ -10,13 +10,4 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { mapState } from "pinia";
-import { useMenuStore } from "../../stores/menu";
-
-export default {
-  computed: {
-    ...mapState(useMenuStore, ["menuItems"]),
-  },
-};
-</script>
+<script src="./script" lang="ts" />

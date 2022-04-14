@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import DefaultTemplate from "../components/Templates/DefaultTemplate";
+import FormMovies from "../components/FormMovies";
+import MovieList from "../components/MovieList";
 </script>
 
 <template>
   <DefaultTemplate>
-    <p class="text-center">
-      Choose between the options daily and weekly to see the best movies in this
-      period of time
-    </p>
+    <FormMovies class="pb-8" />
+    <MovieList />
   </DefaultTemplate>
 </template>

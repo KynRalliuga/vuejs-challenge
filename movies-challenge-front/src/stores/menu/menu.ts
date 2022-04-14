@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const useMenuStore = defineStore({
+const useMenuStore = defineStore({
   id: "menu",
   state: () => ({
     menuItems: [
@@ -15,3 +15,5 @@ export const useMenuStore = defineStore({
     ],
   }),
 });
+
+export default useMenuStore;
