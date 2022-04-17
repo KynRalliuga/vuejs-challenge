@@ -1,24 +1,23 @@
-<script setup lang="ts">
+<script lang="ts">
 import DefaultTemplate from "../components/Templates/DefaultTemplate";
 import FormMovies from "../components/FormMovies";
 import MovieList from "../components/MovieList";
 import useMoviesStore from "../stores/movies/movies";
-import { MutationType } from "pinia";
+import { defineComponent } from "vue";
 
-const movieStore = useMoviesStore();
+export default defineComponent({
+  components: { DefaultTemplate, FormMovies, MovieList },
 
-movieStore.fetchMovies();
-
-movieStore.$subscribe((mutations) => {
-  if (
-    mutations.type === MutationType.direct &&
-    (mutations.events.key === "time_window" || mutations.events.key === "page")
-  ) {
-    if (mutations.events.key === "time_window") {
-      movieStore.resetPage();
-    }
-    movieStore.fetchMovies();
-  }
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      () => {
+        const movieStore = useMoviesStore();
+        movieStore.fetchMovies();
+      },
+      { immediate: true }
+    );
+  },
 });
 </script>
 

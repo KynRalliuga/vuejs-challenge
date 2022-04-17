@@ -1,6 +1,7 @@
 import axios, { type AxiosResponse } from "axios";
 import { defineStore } from "pinia";
 import type { SelectHTMLAttributes } from "vue";
+import router from "../../router";
 import type {
   MovieTMDB,
   ResponseMoviesDataSuccesful,
@@ -10,9 +11,7 @@ import type {
 const useMoviesStore = defineStore({
   id: "movies",
   state: () => ({
-    page: 1,
     totalPages: 1,
-    time_window: "day" as "day" | "week",
     options: [
       {
         value: "day",
@@ -28,21 +27,41 @@ const useMoviesStore = defineStore({
     messageApi: "Carregando...",
   }),
 
+  getters: {
+    page: (): number => {
+      return router.currentRoute.value.params.page
+        ? parseInt(router.currentRoute.value.params.page as string)
+        : 1;
+    },
+
+    time_window: (): "day" | "week" => {
+      return router.currentRoute.value.params.time_window
+        ? (router.currentRoute.value.params.time_window as "day" | "week")
+        : "day";
+    },
+  },
+
   actions: {
     changeTimeWindow(payload: Event) {
-      this.time_window = (payload.target as SelectHTMLAttributes).value;
+      router.push({
+        name: "trendingTimeWindow",
+        params: { time_window: (payload.target as SelectHTMLAttributes).value },
+      });
     },
 
     changePage(type: "+" | "-") {
-      if (type === "+" && this.page < this.totalPages) {
-        this.page++;
-      } else if (type === "-" && this.page > 1) {
-        this.page--;
-      }
-    },
+      let newPage = this.page;
 
-    resetPage() {
-      this.page = 1;
+      if (type === "+" && newPage < this.totalPages) {
+        newPage++;
+      } else if (type === "-" && newPage > 1) {
+        newPage--;
+      }
+
+      router.push({
+        name: "trendingTimeWindowPage",
+        params: { page: newPage, time_window: this.time_window },
+      });
     },
 
     async fetchMovies() {

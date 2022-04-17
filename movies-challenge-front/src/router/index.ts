@@ -15,6 +15,21 @@ const router = createRouter({
       name: "trending",
       component: TrendingView,
     },
+    {
+      path: "/trending/page/:page",
+      name: "trendingPage",
+      component: TrendingView,
+    },
+    {
+      path: "/trending/:time_window",
+      name: "trendingTimeWindow",
+      component: TrendingView,
+    },
+    {
+      path: "/trending/:time_window/page/:page",
+      name: "trendingTimeWindowPage",
+      component: TrendingView,
+    },
   ],
 });
 
