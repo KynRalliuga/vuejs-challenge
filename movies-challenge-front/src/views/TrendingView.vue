@@ -8,7 +8,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   components: { DefaultTemplate, FormMovies, MovieList },
 
-  created() {
+  beforeCreate() {
     this.$watch(
       () => this.$route.params,
       () => {

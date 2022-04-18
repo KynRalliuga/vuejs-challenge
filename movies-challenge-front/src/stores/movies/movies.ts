@@ -88,10 +88,8 @@ const useMoviesStore = defineStore({
             this.movies = [];
             this.messageApi = response.data.status_message;
             this.totalPages = 1;
-          })
-          .finally(() => {
-            this.isLoading = false;
           });
+        this.isLoading = false;
       }
     },
   },
